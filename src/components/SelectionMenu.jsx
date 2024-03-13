@@ -6,13 +6,13 @@ SelectionMenu.propTypes = {
     clickCoords: PropTypes.array,
 };
 
-function SelectionMenu(characterInfo, handleCharSelection, clickCoords) {
+function SelectionMenu({ characterInfo, handleCharSelection, clickCoords }) {
     return (
         <div
             style={{
                 position: 'absolute',
                 left: `calc(${clickCoords[0]}% - 2%)`,
-                top: `calc(${clickCoords[1]}% - 2%)`,
+                top: `calc(${clickCoords[1]}% + 6%)`,
             }}
         >
             <div className="">
@@ -28,7 +28,7 @@ function SelectionMenu(characterInfo, handleCharSelection, clickCoords) {
                                 alt={`${char.name} Image`}
                                 className="charImg"
                             />
-                            <h1>{char.name}</h1>
+                            <h1 className="charName">{char.name}</h1>
                         </div>
                     ))}
                 </div>

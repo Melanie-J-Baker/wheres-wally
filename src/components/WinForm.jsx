@@ -3,10 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 WinForm.propTypes = {
+    gameId: PropTypes.string,
     score: PropTypes.number,
 }
 
-function WinForm(score) {
+function WinForm({ gameId, score }) {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const responseSending = useRef(false);
@@ -17,12 +18,13 @@ function WinForm(score) {
         responseSending.current = true;
 
         const response = await fetch(
-            `${import.meta.env.VITE_API}/game/name`,
+            `${import.meta.env.VITE_API}/game/${gameId}/name`,
             {
                 method: 'PATCH',
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Access-Control-Request-Headers": "Content-Type"
                 },
                 body: JSON.stringify({
                     name: name,
@@ -31,7 +33,7 @@ function WinForm(score) {
         ).then((responseSending.current = false));
 
         if (response.ok) {
-            navigate(`/game/scoreboard`);
+            navigate('/scoreboard');
         } else {
             console.log('Issue uploading name to server')
         }

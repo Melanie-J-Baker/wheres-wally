@@ -2,12 +2,23 @@ import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
 import Game from './components/Game';
 import Welcome from './components/Welcome';
 import Scoreboard from './components/Scoreboard';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import './App.css'
 
 function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
+
+  useEffect(() => {
+      if (window.location.pathname == 'scoreboard') {
+    setCurrentRoute('scoreboard');
+  } else if (window.location.pathname == 'game') {
+    setCurrentRoute('game');
+  } else if (window.location.pathname == '') {
+    setCurrentRoute('home');
+  }
+  },[])
+
   return (
     <Router>
       <nav>

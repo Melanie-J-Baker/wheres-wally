@@ -8,9 +8,16 @@ function Scoreboard() {
     useEffect(() => {
         if (fetchDone.current) return;
         const fetchData = async () => {
-            const response = await fetch(`${import.meta.env.VITE_API}/game`);
+            const response = await fetch(`${import.meta.env.VITE_API}/game`, {
+                method: 'GET',
+                mode: 'cors',
+                headers: {
+                    "Access-Control-Request-Headers": "Content-Type"
+                }
+            });
             const data = await response.json();
-            console.log(data);
+            data.forEach(game => game.score = game.end_time - game.start_time);
+            data.sort((a,b) => a.score - b.score); // b - a for reverse sort
             setGameData(data);
         };
         fetchData();
@@ -22,6 +29,7 @@ function Scoreboard() {
             <h1 className='scoreboardHeading'>Leaderboard</h1>
             <div className='scoreboardDiv'>
                 <div className='scoreboardTitleRow'>
+                    <div></div>
                     <h1 className='timeHeading'>Time</h1>
                     <h1 className='playerHeading'>Player</h1>
                 </div>

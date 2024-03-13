@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import SelectionMenu from '../components/SelectionMenu';
-import gameImage from '../../public/images/game.jpg'
+import gameImage from '../../images/game.jpg'
 import WinForm from "./WinForm";
 import Characters from "./Characters";
 import Timer from "./Timer";
 import Markers from "./Markers";
 import Loading from "./Loading";
+
 function Game() {
     const fetchDone = useRef(false);
     const fetchingCharCoords = useRef(false);
@@ -15,6 +16,7 @@ function Game() {
     const [markers, setMarkers] = useState([]);
     const [gameOver, setGameOver] = useState(false);
     const [score, setScore] = useState(0);
+    const [gameId, setGameId] = useState(null);
 
     const handleClick = (event) => {
         if (fetchingCharCoords.current) return;
@@ -24,7 +26,6 @@ function Game() {
         const y = ((event.clientY - rect.top) / target.offsetHeight) * 100;
         setIsSelecting(true);
         setClickCoords([parseInt(x), parseInt(y)]);
-        console.log(clickCoords);
     };
 
     const handleCharSelection = async (id) => {
@@ -36,6 +37,7 @@ function Game() {
                 mode: 'cors',
                 headers: {
                     'Content-Type': 'application/json',
+                    "Access-Control-Request-Headers": "Content-Type"
                 },
                 body: JSON.stringify({
                     x: clickCoords[0],
@@ -43,18 +45,26 @@ function Game() {
                 })
             }
         );
-        const data = await response.json().then((fetchingCharCoords.current = false))
+        const data = await response
+            .json()
+            .then((fetchingCharCoords.current = false));
+        
         if (data) {
             setMarkers((prevMarkers) => [...prevMarkers, clickCoords]);
-            setCharData((prevCharData) => prevCharData.filter((char) => char._id !== id));
+            setCharData((prevCharData) =>
+                prevCharData.filter((prevChar) => prevChar._id !== id)
+            );
         }
 
         if (charData.length == 1) {
             const response = await fetch(
-                `${import.meta.env.VITE_API}/game/time`,
+                `${import.meta.env.VITE_API}/game/${gameId}/time`,
                 {
                     method: 'PATCH',
                     mode: 'cors',
+                    headers: {
+                        "Access-Control-Request-Headers": "Content-Type"
+                    }
                 }
             );
             if (response.ok) {
@@ -66,34 +76,53 @@ function Game() {
             }
         }
         setIsSelecting(false);
-        setClickCoords([0, 0]);
+        //setClickCoords([0, 0]);
     }
+
+    const handleStartGame = async () => {
+        const response = await fetch(`${import.meta.env.VITE_API}/game`, {
+            method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-type': 'application/json',
+            },
+        });
+        const data = await response.json();
+        if (!data) return console.log('Issue posting new game');
+        setGameId(data);
+    };
 
     useEffect(() => {
         if (fetchDone.current) return;
-        const fetchData = async () => {
-            const response = await fetch(`${import.meta.env.VITE_API}/characters`);
+        const fetchData = async (route) => {
+            const response = await fetch(`${import.meta.env.VITE_API}/${route}`);
             const data = await response.json();
             setCharData(data);
         }
         fetchData('characters');
         fetchDone.current = true;
-    })
+    }, [])
     
     return gameOver ? (
-        <WinForm score={score} />
+        <WinForm gameId={gameId} score={score} />
     ) : !fetchDone.current ? (
         <Loading />
     ) : (
-        <div onClick={() => {isSelecting && setIsSelecting(false);}} className="select-none">
-        <Timer />
-        <Characters charData={charData} />
-            <img
-                className="gameImg"
-                src={gameImage}
-                alt="Game Image"
-                onClick={handleClick}
-            />
+        <div onClick={() => { isSelecting && setIsSelecting(false); }} className="select-none">
+            {charData && (
+                <div className="topDiv">
+                    <Characters charData={charData} />
+                    <Timer />
+                </div>
+            )}
+            <div className="gameDiv">
+                <img
+                    className="gameImg"
+                    src={gameImage}
+                    alt="Game Image"
+                    onClick={handleClick}
+                    onLoad={handleStartGame}
+                />
                 <Markers markers={markers} />
                 {isSelecting && (
                     <SelectionMenu
@@ -103,7 +132,8 @@ function Game() {
                     />
                 )}
             </div>
-        )
-    }
+        </div>
+    )
+}
 
 export default Game;
