@@ -1,6 +1,6 @@
-# Where's Wally Project (part of the Odin Project curriculum) - Frontend
+# Where's Wally Project - Frontend
 
-(Also see backend repository at: github.com/Melanie-J-Baker/wheres-wally-api)
+Where's Wally App (part of the Odin Project curriculum). Also see backend repository at: github.com/Melanie-J-Baker/wheres-wally-api
 
 Built using React (fetching from an Express and MongoDB backend).
 
