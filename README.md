@@ -1,4 +1,6 @@
-# Where's Wally Project (part of the Odin Project curriculum) - Frontend (also see backend repo at: github.com/Melanie-J-Baker/wheres-wally-api)
+# Where's Wally Project (part of the Odin Project curriculum) - Frontend
+
+(Also see backend repository at: github.com/Melanie-J-Baker/wheres-wally-api)
 
 Built using React (fetching from an Express and MongoDB backend).
 
@@ -9,3 +11,8 @@ When the user clicks the photo, it places a targeting box around the portion of 
 Keeps track of how long it takes from when the photo is first loaded to when the user finally identifies all of the characters. Once a round is complete, asks the user for their name and records time. 
 
 I implemented methods to click logic to normalize coordinates across different screensizes.
+
+Project screenshots:
+![image](https://github.com/Melanie-J-Baker/wheres-wally/assets/104843873/1cf39af5-79fa-4b4a-96c3-065a8c90f824)
+![image](https://github.com/Melanie-J-Baker/wheres-wally/assets/104843873/25b19635-1853-4a9c-ab70-90a899e021d7)
+![image](https://github.com/Melanie-J-Baker/wheres-wally/assets/104843873/1b5d0d20-a484-4619-b00d-b9fec31a3ec0)
