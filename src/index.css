@@ -37,7 +37,7 @@ ul {
 }
 
 #welcomeImage {
-  background-image: url("../images/welcome.png");
+  background-image: url("./images/welcome.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: auto;
@@ -60,7 +60,7 @@ ul {
 }
 
 #loading {
-  background-image: url("../images/sky.jpg");
+  background-image: url("./images/sky.jpg");
   height: 100vh;
 }
 
