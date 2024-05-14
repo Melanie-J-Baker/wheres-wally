@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from './Loading';
 
 function Scoreboard() {
     const [gameData, setGameData] = useState([{ _id: 1, player_name: 'time' }])
-    const fetchDone = useRef(false);
-
+    const [loading, setLoading] = useState(true);
+    
+    // Fetch scoreboard details
     useEffect(() => {
-        if (fetchDone.current) return;
         const fetchData = async () => {
             const response = await fetch(`${import.meta.env.VITE_API}/game`, {
                 method: 'GET',
@@ -21,10 +21,10 @@ function Scoreboard() {
             setGameData(data);
         };
         fetchData();
-        fetchDone.current = true;
+        setLoading(false);
     }, []);
 
-    return fetchDone.current ? (
+    return !loading ? (
         <div className='scoreboard'>
             <h1 className='scoreboardHeading'>Leaderboard</h1>
             <div className='scoreboardDiv'>

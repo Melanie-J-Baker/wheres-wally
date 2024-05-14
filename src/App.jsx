@@ -10,14 +10,14 @@ function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
 
   useEffect(() => {
-      if (window.location.pathname == 'scoreboard') {
-    setCurrentRoute('scoreboard');
-  } else if (window.location.pathname == 'game') {
-    setCurrentRoute('game');
-  } else if (window.location.pathname == '') {
-    setCurrentRoute('home');
-  }
-  },[])
+    if (window.location.pathname == 'scoreboard') {
+      setCurrentRoute('scoreboard');
+    } else if (window.location.pathname == 'game') {
+      setCurrentRoute('game');
+    } else if (window.location.pathname == '') {
+      setCurrentRoute('home');
+    }
+  }, [])
 
   return (
     <Router>
