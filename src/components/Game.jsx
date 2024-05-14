@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SelectionMenu from '../components/SelectionMenu';
 import gameImage from '../../images/game.jpg'
 import WinForm from "./WinForm";
@@ -8,7 +8,8 @@ import Markers from "./Markers";
 import Loading from "./Loading";
 
 function Game() {
-    const [loading, setLoading] = useState(true);
+    const fetchDone = useRef(false);
+    const fetchingCharCoords = useRef(false);
     const [charData, setCharData] = useState();
     const [isSelecting, setIsSelecting] = useState(false);
     const [clickCoords, setClickCoords] = useState([0, 0]);
@@ -18,6 +19,7 @@ function Game() {
     const [gameId, setGameId] = useState(null);
 
     const handleClick = (event) => {
+        if (fetchingCharCoords.current) return;
         const target = event.target;
         const rect = target.getBoundingClientRect();
         const x = ((event.clientX - rect.left) / target.offsetWidth) * 100;
@@ -27,7 +29,7 @@ function Game() {
     };
 
     const handleCharSelection = async (id) => {
-        setLoading(true);
+        fetchingCharCoords.current = true;
         const response = await fetch(
             `${import.meta.env.VITE_API}/characters/${id}`,
             {
@@ -43,13 +45,17 @@ function Game() {
                 })
             }
         );
-        const data = await response.json()
+        const data = await response
+            .json()
+            .then((fetchingCharCoords.current = false));
+        
         if (data) {
             setMarkers((prevMarkers) => [...prevMarkers, clickCoords]);
             setCharData((prevCharData) =>
                 prevCharData.filter((prevChar) => prevChar._id !== id)
             );
         }
+
         if (charData.length == 1) {
             const response = await fetch(
                 `${import.meta.env.VITE_API}/game/${gameId}/time`,
@@ -70,7 +76,7 @@ function Game() {
             }
         }
         setIsSelecting(false);
-        setLoading(false);
+        //setClickCoords([0, 0]);
     }
 
     const handleStartGame = async () => {
@@ -87,18 +93,19 @@ function Game() {
     };
 
     useEffect(() => {
+        if (fetchDone.current) return;
         const fetchData = async (route) => {
             const response = await fetch(`${import.meta.env.VITE_API}/${route}`);
             const data = await response.json();
             setCharData(data);
         }
         fetchData('characters');
-        setLoading(false)
+        fetchDone.current = true;
     }, [])
     
     return gameOver ? (
         <WinForm gameId={gameId} score={score} />
-    ) : loading ? (
+    ) : !fetchDone.current ? (
         <Loading />
     ) : (
         <div onClick={() => { isSelecting && setIsSelecting(false); }} className="select-none">
