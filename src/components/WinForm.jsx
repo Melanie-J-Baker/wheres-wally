@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Loading from '../components/Loading'
 
 WinForm.propTypes = {
     gameId: PropTypes.string,
@@ -11,11 +10,13 @@ WinForm.propTypes = {
 function WinForm({ gameId, score }) {
     const navigate = useNavigate();
     const [name, setName] = useState('');
-    const [loading, setLoading] = useState(false);
+    const responseSending = useRef(false);
 
     const submitWinForm = async () => {
+        if (responseSending.current) return;
         if (name.length == 0 || name.length > 20) return;
-        setLoading (true);
+        responseSending.current = true;
+
         const response = await fetch(
             `${import.meta.env.VITE_API}/game/${gameId}/name`,
             {
@@ -29,7 +30,7 @@ function WinForm({ gameId, score }) {
                     name: name,
                 }),
             }
-        ).then(setLoading(false));
+        ).then((responseSending.current = false));
 
         if (response.ok) {
             navigate('/scoreboard');
@@ -37,7 +38,7 @@ function WinForm({ gameId, score }) {
             console.log('Issue uploading name to server')
         }
     };
-    return !loading ? (
+    return (
         <div className="winForm">
             <h1 className="winFormHeading">Your Score: {(score / 1000).toFixed(2)}s</h1>
             <input
@@ -56,7 +57,7 @@ function WinForm({ gameId, score }) {
                 onClick={submitWinForm}
             >Submit</button>
         </div>
-    ) : <Loading/>
+    )
 }
 
 export default WinForm;
