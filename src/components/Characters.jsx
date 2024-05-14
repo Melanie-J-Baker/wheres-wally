@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import '../images/wally.jpeg';
-import '../images/wendy.jpeg';
-import '../images/oddlaw.jpeg';
-import '../images/wizard.jpeg';
+import '../images/wally.jpg';
+import '../images/wendy.jpg';
+import '../images/oddlaw.jpg';
+import '../images/wizard.jpg';
 
 Characters.propTypes = {
     charData: PropTypes.array,
