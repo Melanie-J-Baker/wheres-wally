@@ -16,7 +16,7 @@ function Characters({ charData }) {
                 {' '}
                 {charData.map((char) => (
                     <div key={char._id} className="char">
-                        <img className='charKeyImg' src={char.imgUrl} alt='charImg' />
+                        <img className='charKeyImg' src={char.name == "Wally" ? '../images/wally.jpg' : char.name == "Wendy" ? '../images/wendy.jpg' : char.name == 'Wizard' ? '../images/wizard.jpg' : char.name == 'Oddlaw' ? '../images/oddlaw.jpg' : 'error'} alt='charImg' />
                         <h1 className='charKeyName'>{char.name}</h1>
                     </div>
                 ))}
