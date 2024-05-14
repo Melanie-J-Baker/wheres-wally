@@ -74,7 +74,6 @@ function Game() {
     }
 
     const handleStartGame = async () => {
-        setLoading(true);
         const response = await fetch(`${import.meta.env.VITE_API}/game`, {
             method: 'POST',
             mode: 'cors',
@@ -85,7 +84,6 @@ function Game() {
         const data = await response.json();
         if (!data) return console.log('Issue posting new game');
         setGameId(data);
-        setLoading(false);
     };
 
     useEffect(() => {
