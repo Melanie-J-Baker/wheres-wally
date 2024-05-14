@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import SelectionMenu from '../components/SelectionMenu';
-import gameImage from '../../images/game.jpg'
+import gameImage from '../images/game.jpg';
 import WinForm from "./WinForm";
 import Characters from "./Characters";
 import Timer from "./Timer";
