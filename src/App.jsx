@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Link, Route, useLocation } from 'react-router-dom';
 import Game from './components/Game';
 import Welcome from './components/Welcome';
 import Scoreboard from './components/Scoreboard';
@@ -7,17 +7,18 @@ import { useEffect, useState } from 'react';
 import './App.css'
 
 function App() {
+  const location = useLocation();
   const [currentRoute, setCurrentRoute] = useState('home');
 
   useEffect(() => {
-    if (window.location.pathname == 'scoreboard') {
+    if (location.pathname == '/wheres-wally/scoreboard') {
       setCurrentRoute('scoreboard');
-    } else if (window.location.pathname == 'game') {
+    } else if (location.pathname == '/wheres-wally/game') {
       setCurrentRoute('game');
-    } else if (window.location.pathname == '') {
+    } else if (location.pathname == '/wheres-wally') {
       setCurrentRoute('home');
     }
-  }, [])
+  }, [location.pathname])
 
   return (
     <Router>
@@ -32,8 +33,9 @@ function App() {
         </ul>
       </nav>
       <Routes>
+        <Route path='/' element={<Welcome />} />
+        <Route path="/wheres-wally" element={<Welcome />} />
         <Route path="/wheres-wally/scoreboard" element={<Scoreboard />} />
-        <Route path="/wheres-wally/" element={<Welcome />} />
         <Route path="/wheres-wally/game" element={<Game />} />
       </Routes>
     </Router>
