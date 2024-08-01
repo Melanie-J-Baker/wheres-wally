@@ -11,8 +11,8 @@ function SelectionMenu({ characterInfo, handleCharSelection, clickCoords }) {
         <div
             style={{
                 position: 'absolute',
-                left: `calc(${clickCoords[0]}% - 2%)`,
-                top: `calc(${clickCoords[1]}% + 6%)`,
+                left: `calc(${clickCoords[0]}% - 5%)`,
+                top: `calc(${clickCoords[1]}% + 3%)`,
             }}
         >
             <div className="">
