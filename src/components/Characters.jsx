@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import '/wally.jpg';
-import '/wendy.jpg';
-import '/oddlaw.jpg';
-import '/wizard.jpg';
+import '../images/wally.jpg';
+import '../images/wendy.jpg';
+import '../images/oddlaw.jpg';
+import '../images/wizard.jpg';
 
 Characters.propTypes = {
     charData: PropTypes.array,
@@ -16,7 +16,7 @@ function Characters({ charData }) {
                 {' '}
                 {charData.map((char) => (
                     <div key={char._id} className="char">
-                        <img className='charKeyImg' src={char.name == "Wally" ? '/wally.jpg' : char.name == "Wendy" ? '/wendy.jpg' : char.name == 'Wizard' ? '/wizard.jpg' : char.name == 'Oddlaw' ? '/oddlaw.jpg' : 'error'} alt='charImg' />
+                        <img className='charKeyImg' src={char.name == "Wally" ? '../images/wally.jpg' : char.name == "Wendy" ? '../images/wendy.jpg' : char.name == 'Wizard' ? '../images/wizard.jpg' : char.name == 'Oddlaw' ? '../images/oddlaw.jpg' : 'error'} alt='charImg' />
                         <h1 className='charKeyName'>{char.name}</h1>
                     </div>
                 ))}
