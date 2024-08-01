@@ -11,11 +11,11 @@ function App() {
   const [currentRoute, setCurrentRoute] = useState('home');
 
   useEffect(() => {
-    if (location.pathname == '/wheres-wally/scoreboard') {
+    if (location.pathname == '/wheres-wally/scoreboard/') {
       setCurrentRoute('scoreboard');
-    } else if (location.pathname == '/wheres-wally/game') {
+    } else if (location.pathname == '/wheres-wally/game/') {
       setCurrentRoute('game');
-    } else if (location.pathname == '/wheres-wally') {
+    } else if (location.pathname == '/wheres-wally/') {
       setCurrentRoute('home');
     }
   }, [location.pathname])
@@ -25,18 +25,18 @@ function App() {
       <nav>
         <ul className='mainMenu'>
           {currentRoute !== 'home' && (<li>
-            <Link className="link" onClick={() => setCurrentRoute('home')} to="/wheres-wally">Home</Link>
+            <Link className="link" onClick={() => setCurrentRoute('home')} to="/wheres-wally/">Home</Link>
           </li>)}
           {currentRoute !== 'scoreboard' && (<li>
-            <Link className="link" onClick={() => setCurrentRoute('scoreboard')}to="/wheres-wally/scoreboard">Leaderboard</Link>
+            <Link className="link" onClick={() => setCurrentRoute('scoreboard')}to="/wheres-wally/scoreboard/">Leaderboard</Link>
           </li>)}
         </ul>
       </nav>
       <Routes>
         <Route path='/' element={<Welcome />} />
-        <Route path="/wheres-wally" element={<Welcome />} />
-        <Route path="/wheres-wally/scoreboard" element={<Scoreboard />} />
-        <Route path="/wheres-wally/game" element={<Game />} />
+        <Route path="/wheres-wally/" element={<Welcome />} />
+        <Route path="/wheres-wally/scoreboard/" element={<Scoreboard />} />
+        <Route path="/wheres-wally/game/" element={<Game />} />
       </Routes>
     </Router>
   )
