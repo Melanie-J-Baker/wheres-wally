@@ -3,7 +3,7 @@ function Welcome() {
     return (
         <div id="welcome">
             <div id="welcomeImage"></div>
-            <Link id="startBtn" to={'/game'}>START GAME</Link>
+            <Link id="startBtn" to={'/wheres-wally/game'}>START GAME</Link>
         </div>
     );
 }

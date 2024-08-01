@@ -23,11 +23,7 @@ function SelectionMenu({ characterInfo, handleCharSelection, clickCoords }) {
                             onClick={() => handleCharSelection(char._id)}
                             className="characterOption"
                         >
-                            <img
-                                src={char.imgUrl}
-                                alt={`${char.name} Image`}
-                                className="charImg"
-                            />
+                            <div className={char.name == 'Wally' ? 'charImg wally' : char.name == 'Wendy' ? 'charImg wendy' : char.name == 'Wizard' ? 'charImg wizard' : char.name == 'Oddlaw' ? 'charImg oddlaw' : null}></div>
                             <h1 className="charName">{char.name}</h1>
                         </div>
                     ))}

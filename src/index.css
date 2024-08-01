@@ -98,8 +98,29 @@ ul {
   margin-left: 10px
 }
 
-.charKeyImg {
-  height: 80px;
+.charKeyImg,
+.charImg {
+  height: 160px;
+  width: 75px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wally {
+  background-image: url("./images/wally.jpg");
+}
+
+.wendy {
+  background-image: url("./images/wendy.jpg");
+}
+
+.oddlaw {
+  background-image: url("./images/oddlaw.jpg");
+}
+
+.wizard {
+  background-image: url("./images/wizard.jpg");
 }
 
 .charKeyName {
@@ -120,10 +141,6 @@ ul {
   background-color: white;
   padding: 3px;
   border: 1px solid black;
-}
-
-.charImg {
-  height: 70px;
 }
 
 .charName {
