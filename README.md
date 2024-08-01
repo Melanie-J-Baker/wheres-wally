@@ -4,7 +4,9 @@ Where's Wally App (part of the Odin Project curriculum). Also see backend reposi
 
 Built using React (fetching from an Express and MongoDB backend).
 
-Try it here: https://main--wheres-wally.netlify.app/
+Try the app here: https://melanie-j-baker.github.io/wheres-wally/
+
+Try the API here: https://wheres-wally-api.glitch.me
 
 Very similar to a photo tagging app. A large photograph containing several elements the user is meant to find, e.g. Waldo, The Wizard, Wilma etc. User can make selections for each character and they will be given feedback on whether they are correct or not.
 
