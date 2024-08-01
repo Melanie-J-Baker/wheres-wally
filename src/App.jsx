@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Link, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Link, Route } from 'react-router-dom';
 import Game from './components/Game';
 import Welcome from './components/Welcome';
 import Scoreboard from './components/Scoreboard';
@@ -7,18 +7,17 @@ import { useEffect, useState } from 'react';
 import './App.css'
 
 function App() {
-  const location = useLocation();
   const [currentRoute, setCurrentRoute] = useState('home');
 
   useEffect(() => {
-    if (location.pathname == '/wheres-wally/scoreboard/') {
+    if (window.location.pathname == '/wheres-wally/scoreboard/') {
       setCurrentRoute('scoreboard');
-    } else if (location.pathname == '/wheres-wally/game/') {
+    } else if (window.location.pathname == '/wheres-wally/game/') {
       setCurrentRoute('game');
-    } else if (location.pathname == '/wheres-wally/') {
+    } else if (window.location.pathname == '/wheres-wally/') {
       setCurrentRoute('home');
     }
-  }, [location.pathname])
+  }, [window.location.pathname])
 
   return (
     <Router>
