@@ -24,10 +24,10 @@ function App() {
       <nav>
         <ul className='mainMenu'>
           {currentRoute !== 'home' && (<li>
-            <Link className="link" onClick={() => setCurrentRoute('home')} to="/">Home</Link>
+            <Link className="link" onClick={() => setCurrentRoute('home')} to="/wheres-wally">Home</Link>
           </li>)}
           {currentRoute !== 'scoreboard' && (<li>
-            <Link className="link" onClick={() => setCurrentRoute('scoreboard')}to="/scoreboard">Leaderboard</Link>
+            <Link className="link" onClick={() => setCurrentRoute('scoreboard')}to="/wheres-wally/scoreboard">Leaderboard</Link>
           </li>)}
         </ul>
       </nav>
