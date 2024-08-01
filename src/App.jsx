@@ -32,9 +32,9 @@ function App() {
         </ul>
       </nav>
       <Routes>
-        <Route path="/scoreboard" element={<Scoreboard />} />
-        <Route path="/" element={<Welcome />} />
-        <Route path="/game" element={<Game />} />
+        <Route path="/wheres-wally/scoreboard" element={<Scoreboard />} />
+        <Route path="/wheres-wally/" element={<Welcome />} />
+        <Route path="/wheres-wally/game" element={<Game />} />
       </Routes>
     </Router>
   )
